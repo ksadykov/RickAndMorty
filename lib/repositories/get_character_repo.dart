@@ -5,8 +5,10 @@ class GetCharacterRepo {
   final Dio dio;
   GetCharacterRepo({required this.dio});
 
-  Future<CharacterModel> getCharacterData() async {
-    final response = await dio.get('/character/');
+  Future<CharacterModel> getCharacterData(int page) async {
+    final response = await dio.get('/character/', queryParameters: {
+      'page': page ?? 0,
+    });
     return CharacterModel.fromJson(response.data);
   }
 }

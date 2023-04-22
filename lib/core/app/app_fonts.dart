@@ -6,8 +6,8 @@ abstract class AppFonts {
       fontSize: 30,
       fontWeight: FontWeight.w500,
       color: AppColor.appbarcolortext);
-  static const TextStyle w300s20 = TextStyle(
-      fontSize: 20,
+  static const TextStyle bolds15 = TextStyle(
+      fontSize: 15,
       fontWeight: FontWeight.bold,
       color: AppColor.appbarcolortext);
 }

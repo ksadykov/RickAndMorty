@@ -57,7 +57,7 @@ class _CharacterListState extends State<CharacterList> {
                   ),
                   Column(
                     children: [
-                      Text(widget.name, style: AppFonts.w300s20),
+                      Text(widget.name, style: AppFonts.bolds15),
                       const SizedBox(height: 10),
                       // ignore: avoid_unnecessary_containers
                       Container(
@@ -73,8 +73,8 @@ class _CharacterListState extends State<CharacterList> {
                           });
                         },
                         icon: Icon(_dropdown
-                            ? Icons.arrow_drop_down
-                            : Icons.arrow_drop_up),
+                            ? Icons.arrow_drop_up
+                            : Icons.arrow_drop_down),
                       ),
                     ],
                   ),

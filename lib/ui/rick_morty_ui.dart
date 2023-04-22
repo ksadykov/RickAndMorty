@@ -13,9 +13,15 @@ class RickAndMorty extends StatefulWidget {
 }
 
 class _RickAndMortyState extends State<RickAndMorty> {
+  final controller = ScrollController();
+  int page = 0;
+
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<RickmortyBloc>(context).add(CharacterEvent());
+    controller.addListener(() {
+      pagination(context);
+    });
+    BlocProvider.of<RickmortyBloc>(context).add(CharacterEvent(page: 0));
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -31,17 +37,31 @@ class _RickAndMortyState extends State<RickAndMorty> {
             builder: (context, state) {
           if (state is CharacterSucces) {
             return ListView.builder(
+                controller: controller,
                 shrinkWrap: false,
-                itemCount: 10,
+                itemCount: state.model.results?.length,
                 itemBuilder: (context, index) => CharacterList(
                     name: state.model.results?[index].name ?? '',
                     species: state.model.results?[index].species ?? '',
                     image: state.model.results?[index].image ?? ''));
           }
+          if (state is CharacterLoading) {}
 
-          return Text('Error');
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.amber,
+            ),
+          );
         }),
       ),
     );
+  }
+
+  void pagination(BuildContext context) {
+    if (controller.position.pixels == controller.position.maxScrollExtent) {
+      BlocProvider.of<RickmortyBloc>(context).add(CharacterEvent(page: page++));
+    } else {
+      print('end');
+    }
   }
 }

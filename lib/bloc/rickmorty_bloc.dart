@@ -10,7 +10,8 @@ class RickmortyBloc extends Bloc<RickmortyEvent, RickmortyState> {
   RickmortyBloc({required this.repo}) : super(RickmortyInitial()) {
     on<CharacterEvent>((event, emit) async {
       try {
-        final model = await repo.getCharacterData();
+        emit(CharacterLoading());
+        final model = await repo.getCharacterData(event.page);
         emit(CharacterSucces(model: model));
       } catch (e) {
         emit(CharacterError());
