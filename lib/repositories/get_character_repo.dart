@@ -5,13 +5,8 @@ class GetCharacterRepo {
   final Dio dio;
   GetCharacterRepo({required this.dio});
 
-  Future<CharacterModel> getCharacterData({required String name}) async {
-    final response = await dio.get('character/?name=$name');
-    return CharacterModel.fromJson(response.data);
-  }
-
-  Future<CharacterModel> nextPage({required String path}) async {
-    final response = await dio.get(path);
+  Future<CharacterModel> getCharacterData() async {
+    final response = await dio.get('/character/');
     return CharacterModel.fromJson(response.data);
   }
 }
